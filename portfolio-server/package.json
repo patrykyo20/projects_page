@@ -75,7 +75,7 @@
     "vary": "^1.1.2"
   },
   "scripts": {
-    "start": "node --experimental-detect-module main.js",
+    "start": "ts-node main.ts",
     "test": "npm test"
   },
   "author": "Patrykmclaren14",
