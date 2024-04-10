@@ -1,5 +1,5 @@
 {
-  "type": "module",
+  "type": "commonjs",
   "name": "portfolio-server",
   "version": "1.0.0",
   "description": "backend",
@@ -75,7 +75,7 @@
     "vary": "^1.1.2"
   },
   "scripts": {
-    "start": "node main.js",
+    "start": "node --experimental-detect-module main.js",
     "test": "npm test"
   },
   "author": "Patrykmclaren14",
@@ -90,6 +90,7 @@
     "eslint-plugin-prettier": "^5.1.3",
     "nodemon": "^3.1.0",
     "prettier": "^3.2.5",
-    "sequelize-cli": "^6.6.2"
+    "sequelize-cli": "^6.6.2",
+    "ts-node": "^10.9.2"
   }
 }

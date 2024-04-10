@@ -1,5 +1,5 @@
-import Sequelize from 'sequelize';
-import dotenv from 'dotenv';
+const { Sequelize } = require('sequelize');
+const dotenv = require('dotenv');
 dotenv.config();
 
 let database;
@@ -16,5 +16,4 @@ if (process.env.DB_URL) {
   });
 };
 
-export default database;
-
+module.exports = database;

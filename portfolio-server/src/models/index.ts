@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize';
+const Sequelize = require('sequelize');
 import database from '../config/connections';
 
 export const User = database.define('user', {
