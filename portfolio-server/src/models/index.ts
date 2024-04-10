@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize');
-const database = require('../config/connections')
+import Sequelize from 'sequelize';
+import database from '../config/connections';
 
 export const User = database.define('user', {
   email: {
