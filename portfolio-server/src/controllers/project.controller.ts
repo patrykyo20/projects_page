@@ -98,7 +98,10 @@ const deleteProject: ControllerAction = async (req, res) => {
   const { id } = req.params;
 
   try {
-    
+    await projectService.remove(+id);
+
+    res.sendStatus(204);
+    res.send("project was deleted");
   } catch (error) {
     console.log(error)
   }
