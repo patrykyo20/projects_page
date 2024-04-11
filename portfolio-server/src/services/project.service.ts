@@ -7,6 +7,12 @@ const get = async () => {
   return allProjects;
 };
 
+const getOne = async (id: number) => {
+  const oneProject = await Project.findByPk(id)
+
+  return oneProject;
+}
+
 const create = async (
   images: string[],
   title: string,
@@ -63,6 +69,7 @@ const remove = async (id: number) => {
 
 const projectService = {
   get,
+  getOne,
   create,
   update,
   remove,
