@@ -9,7 +9,7 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_SECRET_KEY,
 });
 
-async function uploadImage(images: string[]) {
+async function uploadImages(images: string[]) {
   try {
     const cloudinaryImages = [];
   
@@ -25,4 +25,4 @@ async function uploadImage(images: string[]) {
   }
 }
 
-export default uploadImage;
+export default uploadImages;
