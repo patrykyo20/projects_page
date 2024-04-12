@@ -1,5 +1,6 @@
 import Project from "../models/project.model";
 import getRandomId from "../utlis/getRandomId";
+import uploadImages from "../utlis/cloudinary";
 
 const get = async () => {
   const allProjects = await Project.findAll();
@@ -25,10 +26,19 @@ const create = async (
   const id = getRandomId();
   const likes: string[] = [];
   const visits = 0;
+  let uploadedImages: string[] = [];
+
+  uploadImages(images)
+    .then((uploadedUrls: any) => {
+      uploadedImages = uploadedUrls
+    })
+    .catch((error: any) => {
+      console.error(error);
+    });
 
   return Project.create({
     id,
-    images,
+    uploadedImages,
     title,
     likes,
     visits,
@@ -49,9 +59,19 @@ const update = async (
   repository: string,
   linkedin: string,
 ) => {
+  let uploadedImages: string[] = [];
+
+  uploadImages(images)
+    .then((uploadedUrls: any) => {
+      uploadedImages = uploadedUrls
+    })
+    .catch((error: any) => {
+      console.error(error);
+    });
+  
   await Project.update({
     title,
-    images,
+    uploadedImages,
     description,
     technologies,
     repository,
