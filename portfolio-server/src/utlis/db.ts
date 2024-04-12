@@ -1,7 +1,9 @@
 import { Sequelize } from 'sequelize-typescript';
 
-import 'dotenv/config';
+import dotenv from 'dotenv';
 import Project from '../models/project.model';
+
+dotenv.config({path: '../../.env'});
 
 const URI = process.env.EXTERNAL_URI || 'postgres';
 
