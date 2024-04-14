@@ -10,7 +10,7 @@ const Burger = () => {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)} 
-        className="lg:hidden flex flex-col justify-center items-center z-10 fixed top-12 right-12"
+        className={`lg:hidden flex flex-col justify-center items-center z-10  ${isOpen ? 'fixed top-8 right-10' : ''}`}
       >
         <span
           className={`bg-steel-500 block transition-all duration-300
