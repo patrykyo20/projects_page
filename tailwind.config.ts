@@ -13,7 +13,8 @@ const config: Config = {
       textPrimary: '#77798F',
       textSecondary: '#ffffff',
       button: '#2A2B3A',
-      link: '#865BFF'
+      link: '#865BFF',
+      headline: '#627FFF'
     },
     extend: {
       backgroundImage: {
