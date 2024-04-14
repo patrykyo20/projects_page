@@ -9,7 +9,7 @@ const Header = () => {
   console.log(SignUpButton)
   return (
     <header
-      className="px-[40px] lg:px-[50px] lg:py-[33.5px] py-[40px] bg-primary w-screen 
+      className="px-[40px] lg:px-[50px] lg:py-[33.5px] py-[40px] bg-primary
         flex justify-between"
     >
       <Image 
@@ -34,7 +34,7 @@ const Header = () => {
         </SignInButton>
 
         <SignUpButton>
-          <Button width={138} height={51} text={"Sing Up"} />
+          <Button width={138} height={51} text={"Sing Up"} active={true} />
         </SignUpButton>
       </div>
       <Burger />
