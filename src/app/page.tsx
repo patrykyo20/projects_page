@@ -1,10 +1,13 @@
-import Button from '@/components/button';
 import Header from './components/Header';
+import Hero from './components/Hero';
+import PersonalizeProfile from './components/PresonalizeProfil';
 
-export default async function Home() {
+export default function Home() { 
   return (
     <>
       <Header />
+      <Hero />
+      <PersonalizeProfile />
     </>
   );
 }
