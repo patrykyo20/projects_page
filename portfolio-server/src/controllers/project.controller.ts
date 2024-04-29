@@ -43,15 +43,10 @@ const postProject: ControllerAction = async (req, res) => {
       userId
     } = req.body;
 
-    if (!(images &&
-      title &&
-      description &&
-      technologies &&
-      repository &&
-      linkedin)) {
-      return res.status(400);
-    };
-    
+    if (!(images && title && description && technologies && repository && linkedin && userId)) {
+      return res.status(400).send('Bad Request: Missing required fields');
+    }
+      
     const newProject = await projectService.create(
       images,
       title,
@@ -62,11 +57,11 @@ const postProject: ControllerAction = async (req, res) => {
       userId,
     );
 
-    res.status(201);
-    res.send(newProject);
+    res.status(201).json(newProject);
   } catch (error) {
-    console.log(error);
-  };
+    console.error('Error creating project:', error);
+    res.status(500).send('Internal Server Error');
+  }
 };
 
 const patchProject: ControllerAction = async (req, res) => {
