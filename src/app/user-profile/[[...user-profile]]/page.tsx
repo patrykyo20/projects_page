@@ -3,7 +3,7 @@
 import { UserProfile } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 
-const UserPage = () => {
+const UserPersonalizeProfil = () => {
   return (
     <div className="flex justify-center p-10">
       <UserProfile 
@@ -18,4 +18,4 @@ const UserPage = () => {
   );
 };
 
-export default UserPage;
+export default UserPersonalizeProfil;
