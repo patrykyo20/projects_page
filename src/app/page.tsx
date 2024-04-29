@@ -5,7 +5,6 @@ import PersonalizeProfile from './components/PersonalizeProfil';
 export default function Home() { 
   return (
     <>
-      <Header />
       <Hero />
       <PersonalizeProfile />
     </>
