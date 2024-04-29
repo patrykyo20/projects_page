@@ -9,20 +9,4 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUDINARY_SECRET_KEY,
 });
 
-async function uploadImages(images: string[]) {
-  try {
-    const cloudinaryImages = [];
-  
-    for (const image of images) {
-      const result = await cloudinary.v2.uploader.upload(image);
-      cloudinaryImages.push(result.url)
-    }
-  
-    return cloudinaryImages;
-  } catch (error) {
-    console.error('Błąd podczas przesyłania obrazu:', error);
-    throw error;
-  }
-}
-
-export default uploadImages;
+export default cloudinary;
