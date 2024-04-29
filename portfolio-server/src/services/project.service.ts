@@ -15,7 +15,7 @@ const getOne = async (id: number) => {
 }
 
 const create = async (
-  images: string[],
+  image: string,
   title: string,
   description: string,
   technologies: string[],
@@ -24,26 +24,19 @@ const create = async (
   userId: string,
 ) => {
   const id = getRandomId();
-  const likes: string[] = [];
+  const likes: string = '{}';
   const visits = 0;
-  let uploadedImages: string[] = [];
-
-  uploadImages(images)
-    .then((uploadedUrls: any) => {
-      uploadedImages = uploadedUrls
-    })
-    .catch((error: any) => {
-      console.error(error);
-    });
+  const technologiesFormatted = technologies.join(', ');
+  console.log(technologiesFormatted)
 
   return Project.create({
     id,
-    uploadedImages,
+    image: `{${image}}`,
     title,
     likes,
     visits,
     description,
-    technologies,
+    technologies: `{${technologiesFormatted}}`,
     repository,
     linkedin,
     userId,
@@ -52,26 +45,17 @@ const create = async (
 
 const update = async (
   id: number,
-  images: string[],
+  image: string,
   title: string,
   description: string,
   technologies: string[],
   repository: string,
   linkedin: string,
 ) => {
-  let uploadedImages: string[] = [];
-
-  uploadImages(images)
-    .then((uploadedUrls: any) => {
-      uploadedImages = uploadedUrls
-    })
-    .catch((error: any) => {
-      console.error(error);
-    });
   
   await Project.update({
     title,
-    uploadedImages,
+    image,
     description,
     technologies,
     repository,
