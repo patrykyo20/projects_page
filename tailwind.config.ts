@@ -25,6 +25,9 @@ const config: Config = {
       dropShadow: {
         'button': '0 0 10px rgba(114, 65, 255, 0.4)',
       },
+      boxShadow: {
+        customShadow: '0 0 20px rgba(114, 65, 255, 0.4)',
+      },
     },
   },
   plugins: [],
