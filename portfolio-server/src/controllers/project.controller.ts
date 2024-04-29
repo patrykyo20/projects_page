@@ -1,5 +1,6 @@
 import projectService from "../services/project.service";
 import ControllerAction from "../types/controllerAction";
+import cloudinary from "../utlis/cloudinary";
 
 const getAllProjects: ControllerAction = async (req, res) => {
   try {
@@ -33,34 +34,30 @@ const getOneProject: ControllerAction = async (req, res) => {
 
 const postProject: ControllerAction = async (req, res) => {
   try {
-    const {
-      images,
-      title,
-      description,
-      technologies,
-      repository,
-      linkedin,
-      userId
-    } = req.body;
+      const { image, title, description, technologies, repository, linkedin, userId } = req.body;
 
-    if (!(images && title && description && technologies && repository && linkedin && userId)) {
-      return res.status(400).send('Bad Request: Missing required fields');
-    }
-      
-    const newProject = await projectService.create(
-      images,
-      title,
-      description,
-      technologies,
-      repository,
-      linkedin,
-      userId,
-    );
+      if (!image || !title || !description || !repository || !linkedin || !userId || !Array.isArray(technologies)) {
+          return res.status(400).json({ error: 'Invalid data' });
+      }
 
-    res.status(201).json(newProject);
+      const uploadedResponse = await cloudinary.v2.uploader.upload(image, {
+          upload_preset: 'dev_setups',
+      });
+
+      const newProject = await projectService.create(
+          uploadedResponse.secure_url,
+          title,
+          description,
+          technologies,
+          repository,
+          linkedin,
+          userId
+      );
+
+      res.status(201).send(newProject);
   } catch (error) {
-    console.error('Error creating project:', error);
-    res.status(500).send('Internal Server Error');
+      console.error('Błąd podczas tworzenia projektu:', error);
+      res.status(500).send('Wewnętrzny błąd serwera');
   }
 };
 
