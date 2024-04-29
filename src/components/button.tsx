@@ -5,13 +5,15 @@ interface ButtonProps {
   height: number;
   text: string;
   active?: boolean;
+  type?: "button" | "submit" | "reset";
 };
 
 const Button: FC<ButtonProps> = ({
   width,
   height,
   text,
-  active = false
+  active = false,
+  type,
 }) => {
   return (
     <button
@@ -23,6 +25,7 @@ const Button: FC<ButtonProps> = ({
       bg-primary
       ${active ? 'border-secondary drop-shadow-button' : ''}`}
       style={{width: `${width}px`, height: `${height}px`}}
+      type={type ? type : 'button'}
     >
       {text}
     </button>
