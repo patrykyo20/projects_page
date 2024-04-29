@@ -15,7 +15,7 @@ app.use(cors());
 connection();
 
 app.use(errorHandler);
-app.use(express.json());
+app.use(express.json({limit: '1000mb'}));
 app.use(express.urlencoded({extended: true}));
 
 app.use('/projects', projectRouter);
