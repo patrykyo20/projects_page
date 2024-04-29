@@ -7,18 +7,18 @@ import { Column, DataType, Model, Table } from 'sequelize-typescript';
 export class Project extends Model {
   @Column({
     primaryKey: true,
-    type: DataType.INTEGER,
+    type: DataType.BIGINT,
   })
   id?: number;
 
-  @Column(DataType.ARRAY(DataType.STRING))
-  image?: string[];
+  @Column(DataType.STRING)
+  image?: string;
 
   @Column(DataType.STRING)
   title?: string;
 
-  @Column(DataType.ARRAY(DataType.STRING))
-  likes?: string[];
+  @Column(DataType.STRING)
+  likes?: string;
 
   @Column(DataType.INTEGER)
   visits?: number;
@@ -26,8 +26,8 @@ export class Project extends Model {
   @Column(DataType.STRING)
   description?: string;
 
-  @Column(DataType.ARRAY(DataType.STRING))
-  technologies?: string[];
+  @Column(DataType.STRING)
+  technologies?: string;
 
   @Column(DataType.STRING)
   repository?: string;
