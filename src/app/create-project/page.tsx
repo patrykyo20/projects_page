@@ -5,27 +5,14 @@ import { ChangeEvent, Dispatch, FormEvent, FormEventHandler, SetStateAction, use
 import Multiselect from 'multiselect-react-dropdown';
 import Button from "@/components/button";
 import Image from "next/image";
-
-const technologies = [
-  {name: "HTML", id: 1}, 
-  {name: "CSS", id: 2},
-  {name: "JS", id: 3},
-  {name: "TS", id: 4},
-  {name: "REACT", id: 5},
-  {name: "TAILWIND", id: 6},
-  {name: "NEXT", id: 7},
-  {name: "SASS", id: 8},
-  {name: "NODE", id: 9},
-  {name: "EXPRESS", id: 10},
-  {name: "POSTGRESS", id: 11}
-];
+import technologies from "../utils/technologies";
 
 interface Technology {
   name: string;
   id: number
 };
 
-type TechnologiesList = Technology[]
+type TechnologiesList = Technology[];
 
 const CreateProject = () => {
   const { user } = useUser();
@@ -36,16 +23,15 @@ const CreateProject = () => {
   const [linkedin, setLinkedin] = useState<string>('');
   const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
 
-  const [image, setImage] = useState<string>('');
-  const [fileInput, setFileInput] = useState<string>('');
-  const [previewSource, setPreviewSource] = useState();
+  const [image, _setImage] = useState<string>('');
+  const [previewSource, setPreviewSource] = useState<string>('');
 
   const handleSetInput = (
     method: Dispatch<SetStateAction<string>>,
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     method(event.target.value)
-  }
+  };
 
   const handleMultiSelect = (selectedList: TechnologiesList) => {
     const technologyNames = selectedList.map(technology => technology.name);
@@ -55,22 +41,26 @@ const CreateProject = () => {
     console.log(technologyNames);
   };
 
-  const handleInputImage = (e) => {
-    const image = e.target.files[0]
-    previewImage(image)
-  }
+  const handleInputImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+        const image: File = files[0];
+        previewImage(image);
+    }
+  };
 
-  const previewImage = (file) => {
+  const previewImage = (file: Blob) => {
     const render = new FileReader();
     render.readAsDataURL(file);
     render.onloadend = () => {
-      setPreviewSource(render.result)
-    }
+        if (render.result !== null) {
+            const result = render.result as string;
+            setPreviewSource(result);
+        }
+    };
+};
 
-    console.log(previewSource)
-  }
-
-  const uploadImage = (base64EncodedImage) => {
+  const uploadImage = (base64EncodedImage: string) => {
     return base64EncodedImage;
   }
 
@@ -118,7 +108,7 @@ const CreateProject = () => {
         : 
   
         <section
-            className="w-[90%] lg:w-[68%] px-[144px] lg:px-[144px] pt-[30px] lg:pt-[78px] pb-[64px] border-t-2 border-l-2 border-r-2 border-headline
+            className="w-[90%] lg:w-[68%] px-[10px] md:px-[72px] xl:px-[100px] pt-[30px] lg:pt-[78px] pb-[64px] border-t-2 border-l-2 border-r-2 border-headline
             border-b-4 rounded-t-20 rounded-r-20 rounded-l-20 rounded-xl shadow-customShadow text-white	"
           >
             <h1 className="text-center text-textSecondary text-[34px] font-bold">
@@ -185,7 +175,7 @@ const CreateProject = () => {
                     Linkedin
                   </label>
                   <input
-                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4
+                    className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mt-5 md:mt-0
                       leading-tight focus:outline-none focus:bg-white focus:border-gray-500 bg-secondary border-headline text-textSecondary"
                     id="grid-city"
                     type="text"
@@ -196,7 +186,7 @@ const CreateProject = () => {
                 </div>
                 <div className="w-full md:w-1/3 px-3 md:mb-0">
                   <label
-                    className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-white text-textSecondary"
+                    className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-white text-textSecondary mt-5 md:mt-0"
                     htmlFor="grid-technologies"
                   >
                     Technologies
@@ -212,7 +202,7 @@ const CreateProject = () => {
                 </div>
                 <div className="w-full md:w-1/3 px-3 md:mb-0">
                   <label
-                    className="block mb-2 text-sm font-medium text-gray-900 text-textSecondary"
+                    className="block mb-2 text-sm font-medium text-gray-900 text-textSecondary mt-5 md:mt-0"
                     htmlFor="file_input"
                   >
                     IMAGE
@@ -232,7 +222,16 @@ const CreateProject = () => {
                 <Button width={200} height={50} text={"Save"} type="submit" />
               </div>
               {previewSource && (
-                <Image src={previewSource} alt="preview" width={500} height={500} />
+                <>
+                  <h6 className="text-textSecondary text-[24px] mt-[30px]">Image</h6>
+                  <Image
+                    src={previewSource}
+                    alt="preview"
+                    width={500}
+                    height={500}
+                    className="mt-5"
+                  />
+                </>
               )}
             </form>
         </section>
