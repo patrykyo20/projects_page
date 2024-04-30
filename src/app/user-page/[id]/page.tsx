@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import Button from "@/components/button";
+import Link from "next/link";
 
 const UserPage = () => {
   const { user } = useUser();
@@ -44,14 +45,16 @@ const UserPage = () => {
               </h3>
               <p className="text-[20px] text-textPrimary mt-[20px]">
                 I&aposm Yagna Kusumanchi, an aspiring Full Stack Developer with a passion for bringing ideas to life. Proficient in C, C++, Python, JavaScript,
-                and experienced in Node, Express, MongoDB, and React, I'm dedicated to crafting innovative and impactful digital solutions. Let's connect and
+                and experienced in Node, Express, MongoDB, and React, I`&apos;`m dedicated to crafting innovative and impactful digital solutions. Let`&apos;`s connect and
                 create something amazing! 👨‍💻
               </p>
               <div className="flex gap-5 mt-[50px] items-center">
                 <h3 className="text-textSecondary text-[34px] font-bold">
                   My Portfolios
                 </h3>
-                <Button width={150} height={45} text={"Create portfolios"} active={true} />
+                <Link href={"/create-project"}>
+                  <Button width={150} height={45} text={"Create portfolios"} active={true} />
+                </Link>
               </div>
 
           </section>
