@@ -14,7 +14,7 @@ const Menu:FC<MenuProps> = ({
   return (
     <div 
       className={`fixed top-0 left-0 w-full h-full bg-primary
-        px-[40px] py-[40px] transform transition-all 
+        px-[40px] py-[40px] transform transition-all z-10
         ease-in-out duration-500 flex flex-col justify-between
         ${isOpen ? 'translate-x-0' : 'translate-x-full'}`
       }
