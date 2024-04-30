@@ -1,14 +1,8 @@
 import Button from "@/components/button";
 import Image from "next/image";
+import gradientStyleHeadline from "../utils/gradientStyles";
 
 const Hero = () => {
-  const gradientStyleHeadline = {
-    backgroundImage: 'linear-gradient(to right, #865BFF, #627FFF)',
-    WebkitBackgroundClip: 'text',
-    backgroundClip: 'text',
-    color: 'transparent'
-  };
-
   return (
     <main className="bg-primary min-h-80 flex flex-col items-center p-[24px]">
       <div className="flex gap-[8px] items-center md:mt-[100px]">
