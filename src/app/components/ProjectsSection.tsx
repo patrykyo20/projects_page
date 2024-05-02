@@ -4,18 +4,6 @@ import Project from "./Project";
 import { useGetAllProjectsQuery } from '../../lib/slices/projects/projectsApi';
 
 const ProjectSection = () => {
-  const { data: projects, error, isLoading } = useGetAllProjectsQuery();
-
-  console.log(projects)
-
-  if (isLoading) {
-    return <div>Loading...</div>; 
-  }
-
-  if (error) {
-    return <div>Error fetching projects</div>; 
-  }
-
   return (
     <section className="px-[31px] md:px-[40px] lg:px-[200px] py-[135px]"> 
       <h1
