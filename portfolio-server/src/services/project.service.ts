@@ -1,11 +1,32 @@
 import Project from "../models/project.model";
 import getRandomId from "../utlis/getRandomId";
-import uploadImages from "../utlis/cloudinary";
 
-const get = async () => {
-  const allProjects = await Project.findAll();
+const get = async (
+  page?: number,
+  pagePerSize?: number,
+  order?: string,
+  sort?: string
+) => {
+  const queryOptions: any = {};
+
+  if (page !== undefined && pagePerSize !== undefined) {
+    queryOptions.limit = pagePerSize;
+    queryOptions.offset = (page - 1) * pagePerSize;
+  }
+
+  if (order && sort) {
+    queryOptions.order = [[sort, order]];
+  }
+
+  const allProjects = await Project.findAll(queryOptions);
 
   return allProjects;
+};
+
+const getLength = async () => {
+  const length = await Project.count();
+
+  return length;
 };
 
 const getOne = async (id: number) => {
@@ -27,7 +48,6 @@ const create = async (
   const likes: string = '{}';
   const visits = 0;
   const technologiesFormatted = technologies.join(', ');
-  console.log(technologiesFormatted)
 
   return Project.create({
     id,
@@ -47,25 +67,35 @@ const update = async (
   id: number,
   image: string,
   title: string,
+  likes: string[],
+  visits: number,
   description: string,
   technologies: string[],
   repository: string,
   linkedin: string,
 ) => {
-  
+  const technologiesFormatted = technologies.join(', ');
+  const formattedLikes = `{${likes}}`
+
+
+  const formattedImage = `{${image}}`;
+
   await Project.update({
     title,
-    image,
+    image: formattedImage,
+    likes: formattedLikes,
+    visits,
     description,
-    technologies,
+    technologies: `{${technologiesFormatted}}`,
     repository,
     linkedin,
   }, { where: { id } });
 
   const updatedProject = await Project.findByPk(id);
-  
+
   return updatedProject;
 };
+
 
 const remove = async (id: number) => {
   await Project.destroy({ where: { id }})
@@ -73,6 +103,7 @@ const remove = async (id: number) => {
 
 const projectService = {
   get,
+  getLength,
   getOne,
   create,
   update,
