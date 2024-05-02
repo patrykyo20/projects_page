@@ -4,20 +4,42 @@ import cloudinary from "../utlis/cloudinary";
 
 const getAllProjects: ControllerAction = async (req, res) => {
   try {
-    const allProjects = await projectService.get();
+    const { page, pagePerSize, order, sort } = req.query;
+
+    const pageNumber = page ? parseInt(page as string, 10) : undefined;
+    const pagePerSizeNumber = pagePerSize ? parseInt(pagePerSize as string, 10) : undefined;
+
+    console.log(page, pagePerSize, order, sort)
+
+    const allProjects = await projectService.get(
+      pageNumber,
+      pagePerSizeNumber,
+      order as string,
+      sort as string
+    );
 
     if (!allProjects) {
       res.status(404).send('Not Found: The specified entity does not exist');
-
       return;
     }
 
     res.send(allProjects);
-    console.log(allProjects);
   } catch (error) {
     console.log(error);
-  };
+    res.status(500).send('Internal Server Error');
+  }
 };
+
+const getProjectsLength: ControllerAction = async (req, res) => {
+  try {
+    const projectLength = await projectService.getLength();
+
+    res.json({ length: projectLength });
+  } catch (error) {
+    res.status(500).send('Internal Server Error');
+  }
+};
+
 
 const getOneProject: ControllerAction = async (req, res) => {
   try {
@@ -66,15 +88,19 @@ const patchProject: ControllerAction = async (req, res) => {
     const { id } = req.params;
 
     const {
-      images,
+      image,
       title,
+      likes,
+      visits,
       description,
       technologies,
       repository,
       linkedin,
     } = req.body;
 
-    if (!(images &&
+    console.log(likes)
+
+    if (!(
       title &&
       description &&
       technologies &&
@@ -83,15 +109,20 @@ const patchProject: ControllerAction = async (req, res) => {
       return res.status(400);
     };
 
+    console.log(likes)
+
     const updateProject = await projectService.update(
       +id,
-      images,
+      image,
       title,
+      likes, 
+      visits,
       description,
       technologies,
       repository,
       linkedin,
     );
+
 
     res.status(201);
     res.send(updateProject);
@@ -115,6 +146,7 @@ const deleteProject: ControllerAction = async (req, res) => {
 
 const projectController = {
   getAllProjects,
+  getProjectsLength,
   getOneProject,
   postProject,
   patchProject,
