@@ -33,7 +33,7 @@ const UserPage = () => {
               <div
                 className="absolute right-[20px] lg:right-[40px] top-[60px] lg:top-[60px]"
               >
-                <Button width={150} height={50} text={"Edit profile"} active={true} />
+                <Button px={4} py={2} text={"Edit profile"} active={true} />
               </div>
 
               <h1 className="text-center text-textSecondary text-[34px] font-bold">
@@ -53,7 +53,7 @@ const UserPage = () => {
                   My Portfolios
                 </h3>
                 <Link href={"/create-project"}>
-                  <Button width={150} height={45} text={"Create portfolios"} active={true} />
+                  <Button px={4} py={2} text={"Create portfolios"} active={true} />
                 </Link>
               </div>
 
