@@ -8,7 +8,7 @@ import { useUser } from "@clerk/nextjs";
 
 interface ProjectCardProps {
   project: Project;
-}
+};
 
 const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
   const { user } = useUser();
@@ -40,22 +40,26 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
   };
 
   return (
-    <article className="px-2 py-5 border-r-2 border-b-4 border-l-2 border-headline border-t-[0.5px] rounded-xl flex flex-col justify-between">
+    <article
+      className="px-2 py-5 border-r-2 border-b-4 border-l-2 border-headline border-t-[0.5px] rounded-xl flex flex-col justify-between
+        min-h-[300px] overflow-hidden h-[328px] items-center"
+    >
       <Image
-        src={project.image && project.image[0] ? project.image[0] : 'projectImage.svg'}
+        src={project.image && project.image[0] ? project.image[0] : '/projectImage.svg'}
         alt="Project Image"
         width={431}
-        height={100}
-        className="rounded-lg"
+        height={226}
+        className="rounded-lg max-h-[226px]"
       />
-      <div className="flex mt-4 justify-between px-3 items-center">
+    
+      <div className="flex mt-4 justify-between w-full items-center px-4">
         <Link href={`/project/${project.id}`}>
-          <Button width={175} height={49} text="Show project" active={true} />
+          <Button px={4} py={2} text="Show project" active={true} />
         </Link>
-        <div className="flex gap-6 items-center">
+        <div className="flex gap-6 justify-between">
           <span className="flex gap-2 text-textSecondary text-[16px] font-medium">
             <Image
-              src="heart.svg"
+              src="/heart.svg"
               alt="heart"
               width={25}
               height={25}
@@ -65,7 +69,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
           </span>
           <span className="flex gap-2 text-textSecondary text-[16px] font-medium">
             <Image
-              src="eye.svg"
+              src="/eye.svg"
               alt="eye"
               width={25}
               height={25}
