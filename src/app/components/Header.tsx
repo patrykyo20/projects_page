@@ -7,9 +7,10 @@ import Navigation from "./Navigation";
 import Burger from "./Burger";
 import { SignUpButton, SignInButton, useUser } from '@clerk/nextjs';
 import Link from "next/link";
+import Skeleton from "@/components/skeleton";
 
 const Header = () => {
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
 
   return (
     <header
@@ -32,29 +33,32 @@ const Header = () => {
           ))}
         </ul>
       </nav>
-      {user 
-        ? 
+      {isLoaded ? (
+        user ? (
           <Link href={`/user-page/${user.id}`}>
             <Image
               src={user.imageUrl}
-              alt={"user-logo"}
+              alt="user-logo"
               width={50}
               height={50}
               className="rounded-full"
             />
           </Link>
-        :
+        ) : (
           <div className="hidden lg:flex gap-[14px]">
             <SignInButton>
-              <Button width={138} height={51} text={"Sing In"} />
+              <Button px={4} py={2} text={"Sign In"} />
             </SignInButton>
 
             <SignUpButton>
-              <Button width={138} height={51} text={"Sing Up"} active={true} />
+              <Button px={4} py={2} text={"Sign Up"} active={true} />
             </SignUpButton>
           </div>
-        }
-        <Burger />
+        )
+      ) : (
+        <Skeleton width={50} height={50} />
+      )}
+      <Burger />
     </header>
   );
 };
