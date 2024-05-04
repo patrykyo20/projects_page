@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import ProjectCard from '../components/ProjectCard';
 import { useGetAllProjectsQuery, useGetProjectsLengthQuery } from '@/lib/slices/projects/projectsApi';
 import Project from '@/types/Project';
+import SkeletonProjectCard from '@/app/components/SkeletonProjectCard';
 
 const Portfolios = () => {
   const router = useRouter();
@@ -49,7 +50,7 @@ const Portfolios = () => {
       >
         All Portfolios
       </h1>
-      <main className='grid justify-center pb-48'>
+      <main className='grid justify-center pb-48 px-3'>
         <div className='flex justify-end max-w-[1700px]'>
           <form className='flex gap-4 mt-5'>
             <select
@@ -94,14 +95,21 @@ const Portfolios = () => {
           </form>
         </div>
 
-        <section className='grid lg:grid-cols-2 xl:grid-cols-3 w-full justify-between max-w-[1700px] mt-10 gap-x-[164px] gap-y-[80px]'>
-          {projects?.map((project: Project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+        <section className="grid lg:grid-cols-2 xl:grid-cols-3 w-full justify-between max-w-[1700px] mt-10 gap-x-[164px] gap-y-[80px] transition-all">
+          {projects && projects.length > 0 ? (
+            projects.map((project: Project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))
+          ) : (
+            Array.from({ length: pagePerSize }).map((_, index) => (
+              <SkeletonProjectCard key={index} />
+            ))
+          )}
         </section>
+
         {projectsLength &&
-          <nav aria-label="Page navigation example ">
-            <ul className="-space-x-px text-base h-10 mt-20 flex justify-center gap-3">
+          <nav aria-label="Page navigation example transition-all">
+            <ul className="-space-x-px text-base h-10 mt-20 flex justify-center gap-3 transition-all">
               <li>
                 <button
                   disabled={page === 1}
