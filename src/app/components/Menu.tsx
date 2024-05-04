@@ -38,8 +38,8 @@ const Menu:FC<MenuProps> = ({
       <div className="flex md:justify-between items-end">
         <h1 className="hidden md:block text-secondary text-[20px] font-semibold mb-0 w-[300px]">Welcome to Click Craft</h1>
         <div className="flex w-full justify-between md:justify-end gap-[14px]">
-          <Button width={138} height={51} text={"Sign In"} />
-          <Button width={138} height={51} text={"Sign Out"} />
+          <Button px={4} py={2} text={"Sign In"} />
+          <Button px={4} py={2} text={"Sign Out"} />
         </div>
       </div>
     </div>

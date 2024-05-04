@@ -34,8 +34,8 @@ const Hero = () => {
       </p>
 
       <div className="flex flex-col md:flex-row gap-[20px] mt-[20px] md:mt-[40px]">
-        <Button width={320} height={70} text={"Get started for free"} active={true} />
-        <Button width={320} height={70} text={"Watch Video"} />
+        <Button px={4} py={3}  text={"Get started for free"} active={true} />
+        <Button px={4} py={3} text={"Watch Video"} />
       </div>
       <div className="absolute hidden md:block ">
         <Image 

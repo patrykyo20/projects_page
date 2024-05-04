@@ -219,7 +219,7 @@ const CreateProject = () => {
                 </div>
               </div>
               <div className="flex w-full justify-end mt-10">
-                <Button width={200} height={50} text={"Save"} type="submit" />
+                <Button px={4} py={2} text={"Save"} type="submit" />
               </div>
               {previewSource && (
                 <>
