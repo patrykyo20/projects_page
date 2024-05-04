@@ -1,16 +1,16 @@
 import { FC } from "react";
 
 interface ButtonProps {
-  width: number;
-  height: number;
+  px: number;
+  py: number;
   text: string;
   active?: boolean;
   type?: "button" | "submit" | "reset";
 };
 
 const Button: FC<ButtonProps> = ({
-  width,
-  height,
+  px = 4,
+  py = 2,
   text,
   active = false,
   type,
@@ -22,9 +22,8 @@ const Button: FC<ButtonProps> = ({
       rounded-full border-button font-semibold
     hover:border-secondary hover:drop-shadow-button
       transition-all ease-in-out duration-500 
-      bg-primary
+      bg-primary px-${px} py-${py} text-[14px] md:text-[16px]
       ${active ? 'border-secondary drop-shadow-button' : ''}`}
-      style={{width: `${width}px`, height: `${height}px`}}
       type={type ? type : 'button'}
     >
       {text}
