@@ -1,13 +1,20 @@
+'use client';
+
 import Button from "@/components/button";
+import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 
 const PersonalizeProfile = () => {
+  const { user } = useUser();
+
   const gradientStyleHeadline = {
     backgroundImage: 'linear-gradient(to right, #865BFF, #627FFF)',
     WebkitBackgroundClip: 'text',
     backgroundClip: 'text',
     color: 'transparent'
   };
+
+  console.log(user)
 
   return (
     <section className="bg-primary min-h-80 flex flex-col items-center p-[31px]">
@@ -53,7 +60,7 @@ const PersonalizeProfile = () => {
           Boost your online presence the easy way!
         </p>
         <div className="mt-[24px] flex justify-center md:justify-start md:col-start-2 md:row-start-4">
-          <Button width={276} height={65} text={"Complete Your Profile"} active={true} />
+          <Button px={4} py={3} text={"Complete Your Profile"} active={true} />
         </div>
 
         <div className="mt=[20px] flex justify-center md:col-start-1 md:row-start-1 md:row-end-5">
