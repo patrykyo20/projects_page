@@ -35,6 +35,34 @@ const getOne = async (id: number) => {
   return oneProject;
 }
 
+const getByUser = async (
+  userId: string,
+  page?: number,
+  pagePerSize?: number,
+  order?: string,
+  sort?: string
+) => {
+  const queryOptions: any = {
+    where: {
+      userId: userId,
+    },
+  };
+
+  if (page !== undefined && pagePerSize !== undefined) {
+    queryOptions.limit = pagePerSize;
+    queryOptions.offset = (page - 1) * pagePerSize;
+  }
+
+  if (order && sort) {
+    const orderType = order === 'asc' ? 'desc' : 'asc';
+    queryOptions.order = [[sort, orderType]];
+  }
+
+  const userProjects = await Project.findAll(queryOptions);
+
+  return userProjects;
+};
+
 const create = async (
   image: string,
   title: string,
@@ -105,6 +133,7 @@ const projectService = {
   get,
   getLength,
   getOne,
+  getByUser,
   create,
   update,
   remove,

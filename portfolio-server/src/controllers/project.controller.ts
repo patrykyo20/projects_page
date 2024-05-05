@@ -9,8 +9,6 @@ const getAllProjects: ControllerAction = async (req, res) => {
     const pageNumber = page ? parseInt(page as string, 10) : undefined;
     const pagePerSizeNumber = pagePerSize ? parseInt(pagePerSize as string, 10) : undefined;
 
-    console.log(page, pagePerSize, order, sort)
-
     const allProjects = await projectService.get(
       pageNumber,
       pagePerSizeNumber,
@@ -40,7 +38,6 @@ const getProjectsLength: ControllerAction = async (req, res) => {
   }
 };
 
-
 const getOneProject: ControllerAction = async (req, res) => {
   try {
     const { id } = req.params;
@@ -54,32 +51,56 @@ const getOneProject: ControllerAction = async (req, res) => {
   };
 };
 
+const getUserProjects: ControllerAction = async (req, res) => {
+  try {
+    const { userId } = req.params
+    const { page, pagePerSize, order, sort } = req.query;
+
+    const pageNumber = page ? parseInt(page as string, 10) : undefined;
+    const pagePerSizeNumber = pagePerSize ? parseInt(pagePerSize as string, 10) : undefined;
+
+    const projects = await projectService.getByUser(
+      userId,
+      pageNumber,
+      pagePerSizeNumber,
+      order as string,
+      sort as string
+    );
+
+    res.status(201);
+    res.send(projects)
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Wystąpił błąd podczas pobierania projektów użytkownika." });
+  }
+}
+
 const postProject: ControllerAction = async (req, res) => {
   try {
-      const { image, title, description, technologies, repository, linkedin, userId } = req.body;
+    const { image, title, description, technologies, repository, linkedin, userId } = req.body;
 
-      if (!image || !title || !description || !repository || !linkedin || !userId || !Array.isArray(technologies)) {
-          return res.status(400).json({ error: 'Invalid data' });
-      }
+    if (!image || !title || !description || !repository || !linkedin || !userId || !Array.isArray(technologies)) {
+      return res.status(400).json({ error: 'Invalid data' });
+    }
 
-      const uploadedResponse = await cloudinary.v2.uploader.upload(image, {
-          upload_preset: 'dev_setups',
-      });
+    const uploadedResponse = await cloudinary.v2.uploader.upload(image, {
+      upload_preset: 'dev_setups',
+    });
 
-      const newProject = await projectService.create(
-          uploadedResponse.secure_url,
-          title,
-          description,
-          technologies,
-          repository,
-          linkedin,
-          userId
-      );
+    const newProject = await projectService.create(
+      uploadedResponse.secure_url,
+      title,
+      description,
+      technologies,
+      repository,
+      linkedin,
+      userId
+    );
 
-      res.status(201).send(newProject);
+    res.status(201).send(newProject);
   } catch (error) {
-      console.error('Błąd podczas tworzenia projektu:', error);
-      res.status(500).send('Wewnętrzny błąd serwera');
+    console.error('Błąd podczas tworzenia projektu:', error);
+    res.status(500).send('Wewnętrzny błąd serwera');
   }
 };
 
@@ -148,6 +169,7 @@ const projectController = {
   getAllProjects,
   getProjectsLength,
   getOneProject,
+  getUserProjects,
   postProject,
   patchProject,
   deleteProject
