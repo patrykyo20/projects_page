@@ -52,7 +52,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
         className="rounded-lg max-h-[226px]"
       />
     
-      <div className="flex mt-4 justify-between w-full items-center px-4">
+      <div className="flex mt-4 justify-between w-full items-center sm:px-4">
         <Link href={`/project/${project.id}`}>
           <Button px={4} py={2} text="Show project" active={true} />
         </Link>

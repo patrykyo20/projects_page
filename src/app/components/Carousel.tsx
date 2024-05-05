@@ -45,7 +45,7 @@ const Carousel: FC<SliderProps> = ({projects}) => {
   };
   return (
     <div className="slider-container max-w-[321px] md:max-w-[650px] lg:max-w-[900px] xl:max-w-[1100px] 2xl:max-w-[1500px]">
-        <Slider ref={sliderRef} {...settings}>
+      <Slider ref={sliderRef} {...settings}>
         {projects ? (
           projects.map(project => (
             <div key={project.id} className="flex justify-center">

@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Carousel from "@/app/components/Carousel";
 
-const ProjectPage = ({ params }: { params: { id: number } }) => {
+const ProjectPage = ({ params }: { params: { id: number }}) => {
   const {id} = { id: params.id };
   const { user } = useUser();
   const [addLikes] = useAddLikesMutation();

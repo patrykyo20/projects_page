@@ -20,14 +20,19 @@ export const projectApi = createApi({
         url: `/${id}`
       })
     }),
-    addLikes: builder.mutation<Project, { id: number; data: Project }>({
+    getUserProjects: builder.query<Project[], { userId: string | undefined; page: number; pagePerSize: number; order: string; sort: string }>({
+      query: ({ userId, page, pagePerSize, order, sort }) => ({
+        url: `/user/${userId}?page=${page}&pagePerSize=${pagePerSize}&order=${order}&sort=${sort}`,
+      }),
+    }),
+    addLikes: builder.mutation<Project, { id: number | undefined; data: Project | undefined }>({
       query: ({ id, data }) => ({
           url: `/${id}`,
           method: 'PATCH',
           body: data,
       }),
     }),
-    addVisits: builder.mutation<Project, { id: number; data: Project }>({
+    addVisits: builder.mutation<Project, { id: number | undefined; data: Project | undefined }>({
       query: ({ id, data }) => ({
           url: `/${id}`,
           method: 'PATCH',
@@ -41,6 +46,7 @@ export const {
   useGetAllProjectsQuery,
   useGetProjectsLengthQuery,
   useGetProjectQuery,
+  useGetUserProjectsQuery,
   useAddLikesMutation,
   useAddVisitsMutation,
 } = projectApi;
