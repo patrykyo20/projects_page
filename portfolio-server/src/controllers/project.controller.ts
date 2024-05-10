@@ -119,22 +119,25 @@ const patchProject: ControllerAction = async (req, res) => {
       linkedin,
     } = req.body;
 
-    console.log(likes)
+
+    const uploadedResponse = await cloudinary.v2.uploader.upload(Array.isArray(image) ? image[0] : image, {
+      upload_preset: 'dev_setups',
+    });
 
     if (!(
+      image &&
       title &&
       description &&
       technologies &&
       repository &&
       linkedin)) {
+      console.log('abba')
       return res.status(400);
     };
 
-    console.log(likes)
-
     const updateProject = await projectService.update(
       +id,
-      image,
+      uploadedResponse.secure_url,
       title,
       likes, 
       visits,
@@ -149,6 +152,7 @@ const patchProject: ControllerAction = async (req, res) => {
     res.send(updateProject);
   } catch (error) {
     console.log(error);
+    res.status(500).send('server error');
   };
 };
 
