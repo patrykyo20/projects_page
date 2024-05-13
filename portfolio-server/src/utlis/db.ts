@@ -7,7 +7,7 @@ const URI = process.env.EXTERNAL_URI || 'postgres';
 
 const sequelize: Sequelize = new Sequelize(URI, {
   dialectOptions: {
-    ssl: true,
+    ssl: false,
   },
   models: [Project, Comment],
 });
@@ -31,3 +31,5 @@ async function connection(): Promise<void> {
 };
 
 export { connection, sequelize };
+
+
