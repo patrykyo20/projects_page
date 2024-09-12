@@ -6,8 +6,12 @@ import Comment from '../models/comment.model';
 const URI = process.env.EXTERNAL_URI || 'postgres';
 
 const sequelize: Sequelize = new Sequelize(URI, {
+  dialect: 'postgres',
   dialectOptions: {
-    ssl: false,
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
   },
   models: [Project, Comment],
 });
