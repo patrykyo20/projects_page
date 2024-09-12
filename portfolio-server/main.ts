@@ -7,11 +7,14 @@ import projectRouter from './src/routes/project.router';
 import commentRouter from './src/routes/comment.router';
 import job from './src/utlis/cron';
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 dotenv.config();
 job.start()
 
 const app: Express = express();
 const PORT = process.env.PORT || 3000;
+
 
 app.use(cors());
 
