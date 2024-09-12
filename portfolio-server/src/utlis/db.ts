@@ -31,3 +31,5 @@ async function connection(): Promise<void> {
 };
 
 export { connection, sequelize };
+
+
