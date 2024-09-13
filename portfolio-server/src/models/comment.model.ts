@@ -12,13 +12,19 @@ export class Comment extends Model {
   id?: number;
 
   @Column(DataType.STRING)
-  message?: string;
+  title?: string;
 
   @Column(DataType.STRING)
-  likes?: string;
+  message?: string;
+
+  @Column(DataType.ARRAY(DataType.STRING))
+  likes?: string[];
 
   @Column(DataType.INTEGER)
   visits?: number;
+
+  @Column(DataType.STRING)
+  userId?: string;
 
   @Column(DataType.STRING)
   author?: string;

@@ -11,14 +11,14 @@ export class Project extends Model {
   })
   id?: number;
 
-  @Column(DataType.STRING)
-  image?: string;
+  @Column(DataType.ARRAY(DataType.STRING))
+  image?: string[];
 
   @Column(DataType.STRING)
   title?: string;
 
-  @Column(DataType.STRING)
-  likes?: string;
+  @Column(DataType.ARRAY(DataType.STRING))
+  likes?: string[];
 
   @Column(DataType.INTEGER)
   visits?: number;
@@ -26,8 +26,8 @@ export class Project extends Model {
   @Column(DataType.STRING)
   description?: string;
 
-  @Column(DataType.STRING)
-  technologies?: string;
+  @Column(DataType.ARRAY(DataType.STRING))
+  technologies?: string[];
 
   @Column(DataType.STRING)
   repository?: string;

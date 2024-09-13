@@ -70,8 +70,8 @@ const create = async (
   author: string,
   authorImage: string,
 ) => {
-  const id: number = 2;
-  const likes: string = '{}';
+  const id: number = getRandomId();
+  const likes: string[] = [];
   const visits = 0;
 
 
@@ -96,13 +96,12 @@ const update = async (
   author: string,
   authorImage: string,
 ) => {
-  const formattedLikes = `{${likes}}`
 
   await Comment.update({
     id,
     title,
     message,
-    likes: formattedLikes,
+    likes,
     visits,
     author,
     authorImage,
