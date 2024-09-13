@@ -76,6 +76,7 @@ const getUserProjects: ControllerAction = async (req, res) => {
 }
 
 const postProject: ControllerAction = async (req, res) => {
+  console.log(req.body);
   try {
     const { image, title, description, technologies, repository, linkedin, userId } = req.body;
 
@@ -88,7 +89,7 @@ const postProject: ControllerAction = async (req, res) => {
     });
 
     const newProject = await projectService.create(
-      uploadedResponse.secure_url,
+      [uploadedResponse.secure_url],
       title,
       description,
       technologies,
@@ -97,12 +98,13 @@ const postProject: ControllerAction = async (req, res) => {
       userId
     );
 
-    res.status(201).send(newProject);
+    res.status(201).json(newProject);
   } catch (error) {
     console.error('Błąd podczas tworzenia projektu:', error);
-    res.status(500).send('Wewnętrzny błąd serwera');
+    res.status(500).json({ error: 'Wewnętrzny błąd serwera' });
   }
 };
+
 
 const patchProject: ControllerAction = async (req, res) => {
   try {
@@ -131,13 +133,12 @@ const patchProject: ControllerAction = async (req, res) => {
       technologies &&
       repository &&
       linkedin)) {
-      console.log('abba')
       return res.status(400);
     };
 
     const updateProject = await projectService.update(
       +id,
-      uploadedResponse.secure_url,
+     [uploadedResponse.secure_url],
       title,
       likes, 
       visits,

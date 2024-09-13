@@ -64,27 +64,26 @@ const getByUser = async (
 };
 
 const create = async (
-  image: string,
+  image: string[],
   title: string,
   description: string,
   technologies: string[],
   repository: string,
   linkedin: string,
-  userId: string,
+  userId: string
 ) => {
   const id = getRandomId();
-  const likes: string = '{}';
+  const likes: string[] = [];
   const visits = 0;
-  const technologiesFormatted = technologies.join(', ');
 
   return Project.create({
     id,
-    image: `{${image}}`,
+    image,
     title,
     likes,
     visits,
     description,
-    technologies: `{${technologiesFormatted}}`,
+    technologies,
     repository,
     linkedin,
     userId,
@@ -93,7 +92,7 @@ const create = async (
 
 const update = async (
   id: number,
-  image: string,
+  image: string[],
   title: string,
   likes: string[],
   visits: number,
@@ -102,25 +101,18 @@ const update = async (
   repository: string,
   linkedin: string,
 ) => {
-  const technologiesFormatted = technologies.join(', ');
-  const formattedLikes = `{${likes}}`
-
-
-  const formattedImage = `{${image}}`;
-
   await Project.update({
     title,
-    image: formattedImage,
-    likes: formattedLikes,
+    image,
+    likes,
     visits,
     description,
-    technologies: `{${technologiesFormatted}}`,
+    technologies,
     repository,
     linkedin,
   }, { where: { id } });
 
   const updatedProject = await Project.findByPk(id);
-
   return updatedProject;
 };
 
