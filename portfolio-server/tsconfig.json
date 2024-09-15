@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "es6",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+  },
+  "include": [
+    "**/*.ts/*.json",
+    "src/**/*.ts",
+    "src/**/**/.ts",
+    "main.ts"],
+  "exclude": [
+    "node_modules"
+  ]
+}
