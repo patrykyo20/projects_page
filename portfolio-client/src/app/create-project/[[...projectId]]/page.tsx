@@ -1,51 +1,40 @@
-"use client";
+'use client';
 
 import { useUser } from "@clerk/nextjs";
-import {
-  ChangeEvent,
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useMemo,
-  useState,
-} from "react";
-import Multiselect from "multiselect-react-dropdown";
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useMemo, useState } from "react";
+import Multiselect from 'multiselect-react-dropdown';
 import Button from "@/components/button";
 import Image from "next/image";
 import technologies from "../../utils/technologies";
 import Project from "@/types/Project";
 import { useGetProjectQuery } from "@/lib/slices/projects/projectsApi";
 import Modal from "@/app/components/Modal";
-import {
-  useAddProjectMutation,
-  usePatchProjectMutation,
-} from "@/lib/slices/projects/projectsApi";
+import { useAddProjectMutation, usePatchProjectMutation } from '@/lib/slices/projects/projectsApi';
 import { useRouter } from "next/navigation";
 
 interface Technology {
   name: string;
-  id: number;
-}
+  id: number | null;
+};
 
 type TechnologiesList = Technology[];
 
 const CreateProject = ({ params }: { params: { projectId: number } }) => {
   const { user } = useUser();
-  const router = useRouter();
+  const router = useRouter()
 
   const projectId = params.projectId;
-  const { data: project } = useGetProjectQuery(projectId);
+  const { data: project, error } = useGetProjectQuery({id: projectId});
 
-  const [title, setTitle] = useState<string>("");
-  const [repository, setRepository] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
-  const [linkedin, setLinkedin] = useState<string>("");
-  const [selectedTechnologies, setSelectedTechnologies] =
-    useState<TechnologiesList>([]);
-  const [image, setImage] = useState<string>("");
-  const [previewSource, setPreviewSource] = useState<string>("");
+  const [title, setTitle] = useState<string>('');
+  const [repository, setRepository] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+  const [linkedin, setLinkedin] = useState<string>('');
+  const [selectedTechnologies, setSelectedTechnologies] = useState<TechnologiesList>([]);
+  const [image, setImage] = useState<string>('');
+  const [previewSource, setPreviewSource] = useState<string>('');
 
-  const [status, setStatus] = useState<string>("");
+  const [status, setStatus] = useState<string>('');
 
   const [addProject] = useAddProjectMutation();
   const [patchProject] = usePatchProjectMutation();
@@ -64,8 +53,8 @@ const CreateProject = ({ params }: { params: { projectId: number } }) => {
 
       setSelectedTechnologies(mappedTechObjects);
       setImage(project.image[0]);
-      setPreviewSource(project.image[0]);
-    }
+      setPreviewSource(project.image[0])
+    };
   }, [project]);
 
   const handleSetInput = (
@@ -100,28 +89,15 @@ const CreateProject = ({ params }: { params: { projectId: number } }) => {
 
   const handleCreateProject = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const image = previewSource;
 
     try {
       let responseData;
 
-      console.log(selectedTechnologies.map((tech) => tech.name));
-
-      const data = {
-        title,
-        repository,
-        description,
-        linkedin,
-        image: [image],
-        technologies: selectedTechnologies.map((tech) => tech.name),
-        userId: user?.id,
-      };
-
-      console.log(data);
-
       if (project) {
         const data = {
-          ...project,
+          ...project, 
           image,
           title,
           description,
@@ -129,51 +105,55 @@ const CreateProject = ({ params }: { params: { projectId: number } }) => {
           repository,
           linkedin,
         };
-
+      
         responseData = await patchProject({ id: projectId, data });
+
       } else {
+        if (!user) {
+          return;
+        }
+
         const data = {
           title,
           repository,
           description,
           linkedin,
-          image: image,
+          image,
           technologies: selectedTechnologies.map((tech) => tech.name),
-          userId: user?.id,
+          userId: user.id,
         };
-
+      
         responseData = await addProject({ data });
       }
 
-      if (responseData.error) {
-        console.error("Błąd odpowiedzi:", responseData.error);
-        setStatus("error");
+      if (error) {
+        console.error('Błąd odpowiedzi:', error);
+        setStatus('error');
       } else {
-        console.log("Otrzymana treść odpowiedzi:", responseData.data);
-        setStatus("success");
+        setStatus('success');
 
         setTimeout(() => {
           if (projectId) {
-            router.push(`/project/${projectId}`);
+            router.push(`/project/${projectId}`)
           } else {
-            router.push("/portfolios");
+            router.push('/portfolios')
           }
-        }, 3000);
+        }, 3000)
       }
     } catch (error) {
-      console.error("Błąd podczas wysyłania zapytania:", error);
+      console.error('Błąd podczas wysyłania zapytania:', error);
     }
   };
 
   return (
     <main className="grid place-items-center min-h-screen relative mb-20">
       {!user ? (
-        "loading"
+        'loading'
       ) : (
-        <section className="w-[90%] lg:w-[68%] px-[10px] md:px-[72px] xl:px-[100px] pt-[30px] lg:pt-[78px] pb-[64px] border-t-2 border-l-2 border-r-2 border-headline border-b-4 rounded-t-20 rounded-r-20 rounded-l-20 rounded-xl shadow-customShadow text-white">
-          <h1 className="text-center text-textSecondary text-[34px] font-bold">
-            Create your project
-          </h1>
+        <section
+          className="w-[90%] lg:w-[68%] px-[10px] md:px-[72px] xl:px-[100px] pt-[30px] lg:pt-[78px] pb-[64px] border-t-2 border-l-2 border-r-2 border-headline border-b-4 rounded-t-20 rounded-r-20 rounded-l-20 rounded-xl shadow-customShadow text-white"
+        >
+          <h1 className="text-center text-textSecondary text-[34px] font-bold">Create your project</h1>
           <form className="w-full mt-[50px]" onSubmit={handleCreateProject}>
             <div className="flex flex-wrap -mx-3 mb-6">
               <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -284,9 +264,7 @@ const CreateProject = ({ params }: { params: { projectId: number } }) => {
             </div>
             {previewSource && (
               <>
-                <h6 className="text-textSecondary text-[24px] mt-[30px]">
-                  Image
-                </h6>
+                <h6 className="text-textSecondary text-[24px] mt-[30px]">Image</h6>
                 <Image
                   src={previewSource}
                   alt="preview"
@@ -299,9 +277,7 @@ const CreateProject = ({ params }: { params: { projectId: number } }) => {
           </form>
         </section>
       )}
-      {status === "success" && (
-        <Modal text={"Succesfully added project"} type="success" />
-      )}
+      {status === 'success' && <Modal text={"Succesfully added project"} type="success"  />}
     </main>
   );
 };

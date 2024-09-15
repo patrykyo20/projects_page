@@ -25,8 +25,6 @@ const Messages = () => {
   useEffect(() => {
     refetch()
   }, [page, pagePerSize, order, sort, refetch]);
-
-  console.log(messages)
   
   return (
     <>
@@ -36,7 +34,7 @@ const Messages = () => {
         All Messages
       </h1>
 
-      <MessageCatalog messages={messages} messagesLength={messagesLength ? messagesLength.length : 0} page={page} pagePerSize={pagePerSize} />
+      <MessageCatalog messages={messages} messagesLength={messagesLength ?? 0} page={page} pagePerSize={pagePerSize} />
     </>
   );
 };

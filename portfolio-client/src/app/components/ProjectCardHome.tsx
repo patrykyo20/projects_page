@@ -35,7 +35,7 @@ const ProjectCardHome: FC<ProjectCardProps> = ({project}) => {
 
       <p
         className="text-[16px] md:text-[26px] text-textPrimary
-          md:text-start md:col-start-2 md:row-start-3 mt-[24px]"
+          md:text-start md:col-start-2 md:row-start-3 mt-[24px] truncate"
       >
         {project.description}
       </p>
