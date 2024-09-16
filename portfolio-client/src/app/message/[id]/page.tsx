@@ -15,7 +15,7 @@ import Button from "@/components/button";
 import Link from "next/link";
 
 const Message = ({ params }: { params: { id: number } }) => {
-  const { id } = { id: params.id };
+  const { id } = params;
   const { user } = useUser();
   const [addLikes] = useAddLikesMutation();
   const [addVisits] = useAddVisitsMutation();
@@ -23,7 +23,7 @@ const Message = ({ params }: { params: { id: number } }) => {
 
   const timeoutRef = useRef<any>(null);
 
-  const { data: message, error } = useGetMessageQuery({ id });
+  const { data: message, error } = useGetMessageQuery(id);
 
   const { data: projects } = useGetAllProjectsQuery({
     page: 1,
@@ -35,7 +35,16 @@ const Message = ({ params }: { params: { id: number } }) => {
   const [likes, setLikes] = useState<string[]>(message?.likes || []);
 
   useEffect(() => {
+    console.log(message);
+console.log(error);
+    console.log(id)
+  }, [])
+
+  useEffect(() => {
     setLikes(message?.likes || []);
+
+    console.log(message)
+console.log(error);
 
     addVisit();
   }, [addVisits, message]);
@@ -130,7 +139,7 @@ const Message = ({ params }: { params: { id: number } }) => {
               href={`/user-page/${message?.userId}`}
             >
               <Image
-                src={message?.authorImage || ""}
+                src={message?.authorImage || "/userImage.svg"}
                 alt={message?.author || "authorImage"}
                 width={75}
                 height={75}

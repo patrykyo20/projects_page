@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const messageApi = createApi({
-  reducerPath: 'MessagesApi',
+  reducerPath: 'messagesApi',
   baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}/comments` }),
   endpoints: (builder) => ({
     getAllMessages: builder.query<Message[], { page: number; pagePerSize: number; order: string; sort: string }>({
@@ -16,8 +16,8 @@ export const messageApi = createApi({
         url: '/length',
       }),
     }),
-    getMessage: builder.query<Message, { id: number | undefined }>({
-      query: ( id ) => ({
+    getMessage: builder.query<Message, number | undefined>({
+      query: (id) => ({
         url: `/${id}`,
       }),
     }),
