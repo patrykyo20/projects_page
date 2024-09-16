@@ -23,7 +23,7 @@ const CreateMessage = ({ params }: { params: { messageId: number } }) => {
   const router = useRouter();
 
   const messageId = params.messageId;
-  const { data: message, error } = useGetMessageQuery({ id: messageId });
+  const { data: message, error } = useGetMessageQuery(messageId);
 
   const [title, setTitle] = useState<string>("");
   const [text, setText] = useState<string>("");
