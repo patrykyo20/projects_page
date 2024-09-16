@@ -17,7 +17,7 @@ const Hero = () => {
           className="uppercase font-bold"
           style={gradientStyleHeadline}
         >
-            welcome to click craft
+            welcome to show your project
         </h6>
       </div>
 

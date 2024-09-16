@@ -25,7 +25,7 @@ const ProjectCardHome: FC<ProjectCardProps> = ({project}) => {
           className="uppercase font-bold"
           style={gradientStyleHeadline}
         >
-          welcome to click craft
+          welcome to Show your project
         </h6>
       </div>
 

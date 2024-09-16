@@ -4,7 +4,7 @@ const Footer = () => {
         <div className="w-full max-w-[1520px] mx-auto flex flex-wrap gap-4 justify-center md:justify-between p-6 text-textPrimary">
 
         <div>
-          © 2024 Click Craft. All rights reserved.
+          © Patryk Wierzbowski. All rights reserved.
         </div>
         <div>
           <ul className="flex gap-8">

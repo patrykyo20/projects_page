@@ -17,12 +17,7 @@ const Header = () => {
       className="px-[40px] lg:px-[50px] lg:py-[33.5px] py-[40px] bg-primary
         flex justify-between"
     >
-      <Image 
-        src="/logo.svg"
-        alt="logo"
-        width={152}
-        height={24}
-      />
+      <h1 className="text-textSecondary text-2xl font-bold">Show your <span className="text-[#7241FF]">project</span></h1>
       <nav className="hidden lg:flex">
         <ul
           className="flex text-textPrimary text-xl font-semibold

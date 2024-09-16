@@ -9,7 +9,7 @@ import CardLayout from "@/components/cardLayout";
 
 interface ProjectCardProps {
   project: Project;
-};
+}
 
 const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
   const { user } = useUser();
@@ -22,7 +22,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
 
       let updatedLikes;
       if (userHasLiked) {
-        updatedLikes = likes.filter(like => like !== user.fullName);
+        updatedLikes = likes.filter((like) => like !== user.fullName);
       } else {
         updatedLikes = [...likes, user.fullName];
       }
@@ -33,24 +33,29 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
 
       try {
         await addLikes({ id: project.id, data: updatedData });
-        console.log('Project likes updated successfully');
       } catch (err) {
-        console.error('Error updating project likes:', err);
+        console.error("Error updating project likes:", err);
       }
     }
   };
 
   return (
-    <CardLayout className="px-2 py-5 rounded-xl flex flex-col justify-between
-        min-h-[300px] overflow-hidden h-[328px] items-center">
+    <CardLayout
+      className="px-2 py-5 rounded-xl flex flex-col justify-between
+        min-h-[300px] overflow-hidden h-[328px] items-center"
+    >
       <Image
-        src={project.image && project.image[0] ? project.image[0] : '/projectImage.svg'}
+        src={
+          project.image && project.image[0]
+            ? project.image[0]
+            : "/projectImage.svg"
+        }
         alt="Project Image"
         width={431}
         height={226}
         className="rounded-lg max-h-[226px]"
       />
-    
+
       <div className="flex mt-4 justify-between w-full items-center sm:px-4">
         <Link href={`/project/${project.id}`}>
           <Button px={4} py={2} text="Show project" active={true} />
@@ -67,12 +72,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
             {likes.length}
           </span>
           <span className="flex gap-2 text-textSecondary text-[16px] font-medium">
-            <Image
-              src="/eye.svg"
-              alt="eye"
-              width={25}
-              height={25}
-            />
+            <Image src="/eye.svg" alt="eye" width={25} height={25} />
             {project.visits}
           </span>
         </div>
