@@ -24,7 +24,7 @@ const CreateProject = ({ params }: { params: { projectId: number } }) => {
   const router = useRouter()
 
   const projectId = params.projectId;
-  const { data: project, error } = useGetProjectQuery({id: projectId});
+  const { data: project, error } = useGetProjectQuery(projectId);
 
   const [title, setTitle] = useState<string>('');
   const [repository, setRepository] = useState<string>('');
