@@ -18,7 +18,7 @@ const ProjectPage = ({ params }: { params: { id: number }}) => {
 
   const timeoutRef = useRef<any>(null);
 
-  const { data: project, error } = useGetProjectQuery({ id });
+  const { data: project, error } = useGetProjectQuery( id );
 
   const { data: projects } = useGetAllProjectsQuery({
     page: 1,
