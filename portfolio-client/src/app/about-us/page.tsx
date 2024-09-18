@@ -4,7 +4,7 @@ const aboutUs = () => {
       <h1 className="text-textSecondary text-center text-[40px] md:text-[54px] mt-[12px] md:mt-[56px] font-bold">
         About Us
       </h1>
-      <main className="min-h-80 px-72 py-24">
+      <main className="min-h-80 px-8 sm:px-12 md:px-16 xl:px-36 2xl:px-72 py-6 md:py-8 xl:py-12">
         <p className="text-textPrimary text-center text-[20px] mt-[20px]  mx-auto">
           Welcome to <strong>Show Your Project</strong>, a platform where
           creativity meets collaboration! Here, you have the opportunity to
@@ -43,7 +43,7 @@ const aboutUs = () => {
           creative presence.
         </p>
 
-        <p className="text-textPrimary text-center text-[20px] mt-[10px] mx-auto">
+        <p className="text-textPrimary text-center text-[20px] mt-[10px] mx-auto mb-24">
           At Show Your Project, your creativity is the star. Post, share,
           connect, and watch your ideas grow into something truly remarkable.
         </p>

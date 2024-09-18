@@ -34,7 +34,7 @@ const ProjectCatalog: FC<ProjectCatalogProps> = ({
 
   return (
     <main className="grid justify-center pb-48 px-3">
-      <div className="flex justify-end max-w-[1700px]">
+      <div className="flex justify-end max-w-[1700px] pr-8">
         <form className="flex gap-4 mt-5">
           <select
             name="order"
@@ -78,7 +78,7 @@ const ProjectCatalog: FC<ProjectCatalogProps> = ({
         </form>
       </div>
 
-      <section className="grid lg:grid-cols-2 xl:grid-cols-3 w-full justify-between max-w-[1700px] mt-10 gap-x-[164px] gap-y-[80px] transition-all">
+      <section className="grid lg:grid-cols-2 2xl:grid-cols-3 w-full justify-between px-8 max-w-[1700px] mt-10 gap-x-[164px] gap-y-[80px] transition-all">
         {projects && projects.length > 0
           ? projects.map((project: Project) => (
               <ProjectCard key={project.id} project={project} />

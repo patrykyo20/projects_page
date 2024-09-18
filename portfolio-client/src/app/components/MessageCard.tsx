@@ -41,7 +41,7 @@ const MessageCard: FC<MessageCardProps> = ({ message }) => {
   };
 
   return (
-      <article className="flex items-center gap-4  max-w-[324px] md:min-w-[660px] md:max-w-[670px]">
+      <article className="flex items-center gap-4 max-w-[324px] md:min-w-[660px] md:max-w-[670px]">
         <CardLayout className="p-5 flex flex-col justify-between min-w-[200px] md:min-w-[553px]">
           <Link href={`/message/${message?.id}`} className="inline-block">
             <p className="text-textPrimary text-[15px] md:text-[20px] truncate">{message?.message}</p>
