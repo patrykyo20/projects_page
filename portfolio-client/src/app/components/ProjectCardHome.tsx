@@ -30,7 +30,7 @@ const ProjectCardHome: FC<ProjectCardProps> = ({ project }) => {
           className="text-[16px] md:text-[26px] text-textPrimary
           md:text-start md:col-start-2 md:row-start-3 mt-[24px] whitespace-normal"
         >
-          {project.description}
+          {project.description.slice(0, 60)} ...
         </p>
 
         <Image
