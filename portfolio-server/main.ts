@@ -5,12 +5,12 @@ import { connection } from './src/utlis/db'
 import errorHandler from './src/utlis/errorHandler'
 import projectRouter from './src/routes/project.router'
 import commentRouter from './src/routes/comment.router'
-import job from './src/utlis/cron'
+// import job from './src/utlis/cron'
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
 dotenv.config()
-job.start()
+// job.start()
 
 const app: Express = express()
 const PORT = process.env.PORT || 3000
