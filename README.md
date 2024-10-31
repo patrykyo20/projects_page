@@ -1,9 +1,8 @@
 # WELCOME
 <h1 id="top">Show your projects</h1>
+<summary>Table of Contents</summary>
 
-<details>
-<h1 id="top">Show Your Project</h1> <details> <summary>Table of Contents</summary> <ol> <li> <a href="#about-the-project">About The Project</a> <ul> <li><a href="#built-with">Built With</a></li> </ul> </li> <li> <a href="#getting-started">Getting Started</a> <ul> <li><a href="#prerequisites">Prerequisites</a></li> <li><a href="#installation">Installation</a></li> </ul> </li> <li><a href="#contact">Contact</a></li> </ol> </details> <!-- ABOUT THE PROJECT -->
-</details>
+ <ol> <li> <a href="#about-the-project">About The Project</a> <ul> <li><a href="#built-with">Built With</a></li> </ul> </li> <li> <a href="#getting-started">Getting Started</a> <ul> <li><a href="#prerequisites">Prerequisites</a></li> <li><a href="#installation">Installation</a></li> </ul> </li> <li><a href="#contact">Contact</a></li> </ol> </details> <!-- ABOUT THE PROJECT -->
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
